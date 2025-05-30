@@ -20,7 +20,7 @@ Expense Tracker is a user-friendly web app built with React.js that helps people
 
 | Name          | GitHub Profile                                               |
 |---------------|--------------------------------------------------------------|
-| Khushi Singh  | [github.com/KhushiSingh0823](https://github.com/KhushiSingh0823) |
+| Kumari Khushi Singh  | [github.com/KhushiSingh0823](https://github.com/KhushiSingh0823) |
 | Aparna Sharma | [github.com/Aparna0603](https://github.com/Aparna0603)       |
 | Shweta Singh  | [github.com/ShwetaCodeCraft](https://github.com/ShwetaCodeCraft) |
 
