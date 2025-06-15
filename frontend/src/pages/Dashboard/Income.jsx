@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 const Income = () => {
   return (
@@ -9,3 +9,4 @@ const Income = () => {
 };
 
 export default Income;
+

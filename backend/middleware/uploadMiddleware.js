@@ -1,12 +1,13 @@
-const multer = require('multer');
+﻿const multer = require('multer');
 
 // configure storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, `uploads/`);
+        cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        const ext = file.originalname.split('.').pop(); // Get file extension safely
+        cb(null, `${Date.now()}.${ext}`); // Use timestamp + extension only
     },
 });
 
@@ -23,3 +24,4 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 module.exports = upload;
+

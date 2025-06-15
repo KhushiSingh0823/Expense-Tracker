@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import CARD_1 from "../../assets/images/card1.png";
 import { LuTrendingUpDown } from "react-icons/lu";
 
@@ -58,7 +58,7 @@ const AuthLayout = ({ children }) => {
         {/* Motivational Text */}
         <div className="z-10">
           <p className="text-blue-900 font-medium text-lg leading-snug italic text-center">
-            “Small savings today lead to big dreams tomorrow.”
+            â€œSmall savings today lead to big dreams tomorrow.â€
           </p>
         </div>
         
@@ -76,3 +76,4 @@ const AuthLayout = ({ children }) => {
 };
 
 export default AuthLayout;
+

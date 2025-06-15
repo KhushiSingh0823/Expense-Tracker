@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import Input from '../../components/Inputs/Input';
 import { useNavigate, Link } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
-
- // <-- Add this import
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -17,19 +20,38 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if(!validateEmail(email)) {
+    if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
       return;
     }
-    if(!password) {
+    if (!password) {
       setError("Please enter the password");
       return;
     }
     setError("");
 
-    // TODO: Your login API call here
+    // login API call 
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
 
-  }
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
+  };
 
   return (
     <AuthLayout>
@@ -39,16 +61,16 @@ const Login = () => {
           Please enter your details to log in
         </p>
         <form onSubmit={handleLogin}>
-          <Input 
+          <Input
             value={email}
-            onChange={({ target }) => setEmail(target.value)} 
-            label="Email Address"  
+            onChange={({ target }) => setEmail(target.value)}
+            label="Email Address"
             placeholder="john@example.com"
             type="text"
           />
-          <Input 
+          <Input
             value={password}
-            onChange={({ target }) => setPassword(target.value)} 
+            onChange={({ target }) => setPassword(target.value)}
             label="Password"
             placeholder="Minimum 8 Characters"
             type="password"
@@ -73,3 +95,4 @@ const Login = () => {
 };
 
 export default Login;
+

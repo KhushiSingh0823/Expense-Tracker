@@ -1,4 +1,4 @@
-const User = require('../models/User');
+﻿const User = require('../models/User');
 const jwt = require("jsonwebtoken");
 
 // Generate JWT token
@@ -8,7 +8,7 @@ const generateToken = (id) => {
 
 // Register User
 exports.registerUser = async (req, res) => {
-    const { fullName, email, password, profileImageUrl } = req.body;
+    const { fullName, email, password } = req.body;
 
     if (!fullName || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
@@ -18,6 +18,12 @@ exports.registerUser = async (req, res) => {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: "Email already in use" });
+        }
+
+        
+        let profileImageUrl = "";
+        if (req.file) {
+            profileImageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
         }
 
         const user = await User.create({
@@ -73,3 +79,4 @@ exports.getUserInfo = async (req, res) => {
         res.status(500).json({ message: "Error fetching user info", error: err.message });
     }
 };
+

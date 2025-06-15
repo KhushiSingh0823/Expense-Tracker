@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
 const ProfilePhotoSelector = ({ image, setImage }) => {
@@ -69,3 +69,4 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
 };
 
 export default ProfilePhotoSelector;
+

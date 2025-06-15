@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 const Input = ({ value, onChange, placeholder, label, type }) => {
@@ -32,3 +32,4 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
 };
 
 export default Input;
+
