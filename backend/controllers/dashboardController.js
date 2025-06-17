@@ -1,8 +1,8 @@
 ﻿const Income = require("../models/Income");
 const Expense = require("../models/Expense");
-const { isValidObjectId, Types } = require("mongoose");
+const { Types } = require("mongoose");
 
-//Dashboard Data
+// Dashboard Data
 exports.getDashboardData = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -18,9 +18,12 @@ exports.getDashboardData = async (req, res) => {
             { $group: { _id: null, total: { $sum: "$amount" } } },
         ]);
 
+        const sixtyDaysAgo = new Date();
+        sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
         const last60daysIncomeTransactions = await Income.find({
             userId: userObjectId,
-            date: { $gte: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000) },
+            date: { $gte: sixtyDaysAgo },
         }).sort({ date: -1 });
 
         const incomeLast60Days = last60daysIncomeTransactions.reduce(
@@ -28,9 +31,12 @@ exports.getDashboardData = async (req, res) => {
             0
         );
 
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
         const last30DaysExpenseTransactions = await Expense.find({
             userId: userObjectId,
-            date: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) },
+            date: { $gte: thirtyDaysAgo },
         }).sort({ date: -1 });
 
         const expensesLast30Days = last30DaysExpenseTransactions.reduce(
@@ -56,7 +62,13 @@ exports.getDashboardData = async (req, res) => {
             },
             last60DaysIncome: {
                 total: incomeLast60Days,
-                transactions: last60daysIncomeTransactions,
+                transactions: last60daysIncomeTransactions.map(item => ({
+                    _id: item._id,
+                    amount: item.amount,
+                    source: item.source,
+                    date: item.date,
+                    icon: item.icon,
+                })),
             },
             recentTransactions: lastTransactions,
         });
@@ -64,4 +76,3 @@ exports.getDashboardData = async (req, res) => {
         res.status(500).json({ message: "Server Error", error });
     }
 };
-

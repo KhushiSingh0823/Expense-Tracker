@@ -12,7 +12,7 @@ import CustomLegend from './CustomLegend';
 
 const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }) => {
   return (
-    <div className="relative w-full h-[300px]">
+    <div className="relative w-full h-[340px]"> 
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -20,13 +20,16 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }) =>
             dataKey="amount"
             nameKey="name"
             cx="50%"
-            cy="50%"
-            outerRadius={130}
-            innerRadius={100}
+            cy="52%" 
+            outerRadius={120} 
+            innerRadius={90}
             labelLine={false}
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={entry.fill || colors[index % colors.length]}
+              />
             ))}
           </Pie>
           <Tooltip content={<CustomToolTip />} />
@@ -45,4 +48,3 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }) =>
 };
 
 export default CustomPieChart;
-

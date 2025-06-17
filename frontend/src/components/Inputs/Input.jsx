@@ -10,20 +10,27 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
 
   return (
     <div className="mb-4">
-      {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label}
+        </label>
+      )}
 
-      <div className="relative flex items-center border rounded-md px-3 py-2 bg-white shadow-sm">
+      <div className="relative flex items-center border border-gray-300 rounded-md px-4 py-2 bg-white shadow-md">
         <input
           type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
           placeholder={placeholder}
-          className="w-full bg-transparent outline-none text-sm text-gray-800"
+          className="w-full bg-transparent outline-none text-sm text-gray-800 pr-8"
           value={value}
           onChange={onChange}
         />
 
         {type === 'password' && (
-          <div className="ml-2 cursor-pointer text-gray-500" onClick={toggleShowPassword}>
-            {showPassword ? <FaRegEye size={18} /> : <FaRegEyeSlash size={18} />}
+          <div
+            className="absolute right-4 text-gray-500 cursor-pointer"
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? <FaRegEyeSlash size={18} /> : <FaRegEye size={18} />}
           </div>
         )}
       </div>
@@ -32,4 +39,3 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
 };
 
 export default Input;
-
