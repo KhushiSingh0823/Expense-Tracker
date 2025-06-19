@@ -40,3 +40,18 @@
 .add-btn-fill{
   @apply text-white bg-purple-500 
 }
+
+/* Remove browser native password eye icons */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
