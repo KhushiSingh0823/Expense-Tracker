@@ -1,22 +1,29 @@
 ﻿const express = require("express");
 const { protect } = require("../middleware/authMiddleware");
-const upload = require("../middleware/uploadImage");
+const upload = require("../middleware/uploadMiddleware"); 
 
-const authController = require("../controllers/authController"); 
+const {
+    registerUser,
+    loginUser,
+    getUserInfo,
+} = require("../controllers/authController");
 
 const router = express.Router();
 
-// ✅ Use correct reference to functions
-router.post("/register", upload.single("image"), authController.registerUser);
-router.post("/login", authController.loginUser);
-router.get("/getUser", protect, authController.getUserInfo);
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.get("/getUser", protect, getUserInfo);
 
 router.post("/upload-image", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ message: "No file uploaded" });
-  }
-  const imageURL = req.file.path;
-  res.status(200).json({ imageURL });
+    if (!req.file) {
+        return res.status(400).json({ message: "no file uploaded" });
+    }
+    const imageURL = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+    res.status(200).json({ imageURL });
+});
+
+router.post("/logout", (req, res) => {
+    res.status(200).json({ message: "Logged out successfully" });
 });
 
 module.exports = router;
