@@ -1,18 +1,28 @@
 ﻿import React, { createContext, useState } from "react";
+import axios from "axios";
 
 export const UserContext = createContext();
+
+const url = import.meta.env.VITE_API_BASE_URL;
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Function to update user data
   const updateUser = (userData) => {
     setUser(userData);
   };
 
-  // Function to clear user data (e.g., on logout)
   const clearUser = () => {
     setUser(null);
+  };
+
+  const loginUser = async (email, password) => {
+    const res = await axios.post(`${url}/api/users/login`, {
+      email,
+      password,
+    });
+    setUser(res.data.user);
+    return res.data;
   };
 
   return (
@@ -21,6 +31,7 @@ const UserProvider = ({ children }) => {
         user,
         updateUser,
         clearUser,
+        loginUser,
       }}
     >
       {children}
@@ -29,4 +40,3 @@ const UserProvider = ({ children }) => {
 };
 
 export default UserProvider;
-

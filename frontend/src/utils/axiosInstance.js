@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import { BASE_URL } from "./apiPaths"; // Make sure this path is correct
+import { BASE_URL } from "./apiPaths"; 
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -41,4 +41,3 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
-
