@@ -15,13 +15,15 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://expense-tracker-frontend-k8lq.onrender.com"
+      "https://expense-tracker-dk6g.onrender.com"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
+app.options("*", cors());
 
 app.use(express.json());
 
