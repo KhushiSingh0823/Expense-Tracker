@@ -1,8 +1,9 @@
-﻿import React from 'react';
+﻿import React, { useEffect } from 'react';
 import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 
 import Login from "./pages/Auth/Login";
@@ -30,8 +31,8 @@ const App = () => {
       <Toaster 
         toastOptions={{
           className: "",
-          style: {
-            fontSize: '13px'
+          style:{
+            fontSize:'13px'
           },
         }}
       />
@@ -41,12 +42,18 @@ const App = () => {
 
 export default App;
 
+// ✅ Reliable Root component with programmatic redirect
 const Root = () => {
-  const isAuthenticated = !!localStorage.getItem("token");
+  const navigate = useNavigate();
 
-  return isAuthenticated ? (
-    <Navigate to="/dashboard" />
-  ) : (
-    <Navigate to="/login" />
-  );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  return null; // Don't render anything until redirected
 };
