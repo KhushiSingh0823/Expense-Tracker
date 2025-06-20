@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -12,22 +11,20 @@ import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import UserProvider from './context/userContext';
-import {Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <UserProvider>
       <div>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/dashboard" element={<Home />} />
-            <Route path="/income" element={<Income />} />
-            <Route path="/expense" element={<Expense />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/" element={<Root />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/dashboard" element={<Home />} />
+          <Route path="/income" element={<Income />} />
+          <Route path="/expense" element={<Expense />} />
+        </Routes>
       </div>
       <Toaster 
         toastOptions={{
