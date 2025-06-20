@@ -13,7 +13,8 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://expense-tracker-kappa-nine-20.vercel.app"
+    "https://expense-tracker-hqdkye4xs-khushisingh0823s-projects.vercel.app",
+    "https://expense-tracker-mauve-three-18.vercel.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
