@@ -10,16 +10,15 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-// CORS configuration (allow all origins)
+// ✅ Fixed CORS configuration (only allow localhost:5173)
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: false, // required to be false if origin is '*'
+  credentials: true, // Enable if frontend sends cookies or auth headers
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
