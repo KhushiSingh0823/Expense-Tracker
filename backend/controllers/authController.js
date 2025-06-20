@@ -3,38 +3,42 @@ const generateToken = require("../utils/generateToken");
 
 // Register User
 const registerUser = async (req, res) => {
-    const { fullName, email, password } = req.body;
+  const { fullName, email, password, profileImageUrl } = req.body;
+console.log(profileImageUrl,"image")
 
-    if (!fullName || !email || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+  if (!fullName || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
     }
 
-    try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "Email already in use" });
-        }
+    
+    // if (req.file) {
+    //   profileImageUrl = req.file.path;
+    // }
 
-        let profileImageUrl = "";
-        if (req.file) {
-            profileImageUrl = req.file.path;
-        }
+    const user = await User.create({
+      fullName,
+      email,
+      password,
+      profileImageUrl,
+    });
+    console.log("USer",user)
 
-        const user = await User.create({
-            fullName,
-            email,
-            password,
-            profileImageUrl,
-        });
-
-        res.status(201).json({
-            id: user._id,
-            user,
-            token: generateToken(user._id),
-        });
-    } catch (err) {
-        res.status(500).json({ message: "Error registering user", error: err.message });
-    }
+    res.status(201).json({
+      id: user._id,
+      user,
+      token: generateToken(user._id),
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error registering user", error: err.message });
+  }
 };
 
 // Login User
