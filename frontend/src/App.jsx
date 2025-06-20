@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
   Navigate,
@@ -17,26 +16,24 @@ import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <UserProvider>
-      <BrowserRouter>
-        <div>
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/dashboard" element={<Home />} />
-            <Route path="/income" element={<Income />} />
-            <Route path="/expense" element={<Expense />} />
-          </Routes>
-        </div>
-        <Toaster 
-          toastOptions={{
-            className: "",
-            style: {
-              fontSize: '13px'
-            },
-          }}
-        />
-      </BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Root />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/dashboard" element={<Home />} />
+          <Route path="/income" element={<Income />} />
+          <Route path="/expense" element={<Expense />} />
+        </Routes>
+      </div>
+      <Toaster 
+        toastOptions={{
+          className: "",
+          style:{
+            fontSize:'13px'
+          },
+        }}
+      />
     </UserProvider>
   );
 };
