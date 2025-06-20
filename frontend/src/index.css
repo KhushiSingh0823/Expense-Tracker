@@ -41,7 +41,6 @@
   @apply text-white bg-purple-500 
 }
 
-/* Remove browser native password eye icons */
 input::-ms-reveal,
 input::-ms-clear {
   display: none;
@@ -55,3 +54,21 @@ input::-webkit-credentials-auto-fill-button {
   right: 0;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.shadow-emoji {
+  box-shadow: 0px 14px 40px rgba(0, 0, 0, 0.1);
+}
