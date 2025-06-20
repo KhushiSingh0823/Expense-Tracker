@@ -31,6 +31,9 @@ app.use(express.json());
 connectDB();
 
 // API routes
+app.use("/test", (req, res) => {
+  res.send("Test");
+});
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
