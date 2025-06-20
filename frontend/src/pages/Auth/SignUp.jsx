@@ -35,7 +35,6 @@ const Signup = () => {
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  // Handle Sign Up Form Submit
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -59,18 +58,11 @@ const Signup = () => {
     setError("");
 
     try {
-      // Upload image if present
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
-
         profileImageUrl = imgUploadRes.imageURL || "";
       }
-      console.log({
-        fullName,
-        email,
-        password,
-        profileImageUrl,
-      });
+
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
@@ -97,7 +89,7 @@ const Signup = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Create an Account</h3>
+        <h3 className="text-xl font-semibold text-purple-600">Create an Account</h3>
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Join us today by entering your details below.
         </p>
@@ -135,14 +127,14 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+            className="mt-6 w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded transition duration-300"
           >
             Sign Up
           </button>
 
           <p className="text-sm mt-4 text-center">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 underline">
+            <Link to="/login" className="text-purple-600 underline">
               Login
             </Link>
           </p>

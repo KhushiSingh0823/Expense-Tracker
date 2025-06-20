@@ -13,10 +13,8 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const { updateUser } = useContext(UserContext);
-
   const navigate = useNavigate();
 
-  //Handle Login Form Submit
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -30,7 +28,6 @@ const Login = () => {
     }
     setError("");
 
-    // login API call 
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
@@ -56,7 +53,7 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>Expense Tracker</h3>
+        <h3 className='text-xl font-semibold text-purple-600'>Expense Tracker</h3>
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
           Please enter your details to log in
         </p>
@@ -78,13 +75,13 @@ const Login = () => {
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-          <button type="submit" className='btn-primary'>
+          <button type="submit" className='bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded font-semibold transition duration-300 w-full mt-4'>
             LOGIN
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
             Don't have an account?{" "}
-            <Link className='font-medium text-primary underline' to='/signup'>
+            <Link className='font-medium text-purple-600 underline' to='/signup'>
               Signup
             </Link>
           </p>
@@ -95,4 +92,3 @@ const Login = () => {
 };
 
 export default Login;
-
