@@ -11,7 +11,6 @@ import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
 const Income = () => {
-
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
@@ -30,7 +29,6 @@ const Income = () => {
 
     try {
       const response = await axiosInstance.get(API_PATHS.INCOME.GET_ALL_INCOME);
-
       if (response.data) {
         setIncomeData(response.data);
       }
@@ -71,7 +69,6 @@ const Income = () => {
       fetchIncomeDetails();
     } catch (error) {
       toast.error(
-        "Error adding Income:",
         error.response?.data?.message || error.message || "Error adding Income"
       );
     }
@@ -81,7 +78,6 @@ const Income = () => {
   const deleteIncome = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
-
       setOpenDeleteAlert({ show: false, data: null });
       toast.success("Income details deleted successfully");
       fetchIncomeDetails();
@@ -95,7 +91,7 @@ const Income = () => {
 
   // Handle download income details
   const handleDownloadIncomeDetails = async () => {
-    try{
+    try {
       const response = await axiosInstance.get(
         API_PATHS.INCOME.DOWNLOAD_INCOME,
         {
@@ -103,7 +99,6 @@ const Income = () => {
         }
       );
 
-      // Create a URL for the blob
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
@@ -112,11 +107,11 @@ const Income = () => {
       link.click();
       link.parentNode.removeChild(link);
       window.URL.revokeObjectURL(url);
-    }catch(error){
-      console.log("Error downloading income details:",error);
+    } catch (error) {
+      console.log("Error downloading income details:", error);
       toast.error("Failed to download income details. Please try again.");
     }
-   };
+  };
 
   useEffect(() => {
     fetchIncomeDetails();
@@ -125,14 +120,12 @@ const Income = () => {
 
   return (
     <DashboardLayout activeMenu="Income">
-      <div className="my-5 mx-auto">
+      <div className="my-5 mx-auto dark:bg-gray-900 min-h-screen pb-10 px-2 sm:px-4 md:px-6 lg:px-8 transition-all duration-300">
         <div className="grid grid-cols-1 gap-6">
-          <div>
-            <IncomeOverview
-              transactions={incomeData}
-              onAddIncome={() => setOpenAddIncomeModal(true)}
-            />
-          </div>
+          <IncomeOverview
+            transactions={incomeData}
+            onAddIncome={() => setOpenAddIncomeModal(true)}
+          />
 
           <IncomeList
             transactions={incomeData}
@@ -142,6 +135,7 @@ const Income = () => {
             onDownload={handleDownloadIncomeDetails}
           />
         </div>
+
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
@@ -149,13 +143,14 @@ const Income = () => {
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
+
         <Modal
           isOpen={openDeleteAlert.show}
           onClose={() => setOpenDeleteAlert({ show: false, data: null })}
           title="Delete Income"
         >
           <DeleteAlert
-            content="Are you sure you want to delete this income details? "
+            content="Are you sure you want to delete this income details?"
             onDelete={() => deleteIncome(openDeleteAlert.data)}
           />
         </Modal>

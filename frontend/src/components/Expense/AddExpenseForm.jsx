@@ -15,7 +15,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
   };
 
   return (
-    <div>
+    <div className="text-white">
       <EmojiPickerPopup
         icon={expense.icon}
         onSelect={(selectedIcon) =>

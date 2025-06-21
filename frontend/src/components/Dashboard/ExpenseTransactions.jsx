@@ -7,8 +7,8 @@ const ExpenseTransactions = ({ transactions, onSeeMore }) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between">
-        <h5 className="text-lg">Expenses</h5>
-        <button className="card-btn" onClick={onSeeMore}>
+        <h5 className="text-lg text-white">Expenses</h5>
+        <button className="card-btn text-gray-400 hover:text-white" onClick={onSeeMore}>
           See All <LuArrowRight className="text-base" />
         </button>
       </div>
@@ -30,4 +30,3 @@ const ExpenseTransactions = ({ transactions, onSeeMore }) => {
 };
 
 export default ExpenseTransactions;
-

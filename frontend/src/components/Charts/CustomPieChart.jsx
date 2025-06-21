@@ -39,8 +39,8 @@ const CustomPieChart = ({ data, label, totalAmount, colors, showTextAnchor }) =>
 
       {showTextAnchor && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <p className="text-sm text-gray-600">{label}</p>
-          <p className="text-lg font-semibold text-gray-800">{totalAmount}</p>
+          <p className="text-sm text-gray-400">{label}</p>
+          <p className="text-lg font-semibold text-white">{totalAmount}</p>
         </div>
       )}
     </div>

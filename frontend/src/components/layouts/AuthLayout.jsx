@@ -5,7 +5,7 @@ import { LuTrendingUpDown } from "react-icons/lu";
 const StatsInfoCard = ({ icon, label, value, color }) => {
   return (
     <div
-      className="bg-white p-5 rounded-2xl shadow-lg flex items-center gap-5 w-80 z-30 
+      className="bg-[#1a1a1a] p-5 rounded-2xl shadow-lg flex items-center gap-5 w-80 z-30 
                  hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
     >
       <div
@@ -14,8 +14,8 @@ const StatsInfoCard = ({ icon, label, value, color }) => {
         {icon}
       </div>
       <div>
-        <p className="text-gray-500 text-sm tracking-wide">{label}</p>
-        <h4 className="text-2xl font-semibold text-gray-900">{value}</h4>
+        <p className="text-gray-400 text-sm tracking-wide">{label}</p>
+        <h4 className="text-2xl font-semibold text-white">{value}</h4>
       </div>
     </div>
   );
@@ -23,7 +23,7 @@ const StatsInfoCard = ({ icon, label, value, color }) => {
 
 const AuthLayout = ({ children }) => {
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-gray-50 to-gray-200 flex flex-col md:flex-row relative font-sans overflow-hidden">
+    <div className="w-full h-screen bg-gradient-to-br from-[#121212] to-[#1a1a1a] flex flex-col md:flex-row relative font-sans overflow-hidden">
       
       {/* App Title */}
       <div className="absolute top-6 left-8 z-20">
@@ -34,7 +34,7 @@ const AuthLayout = ({ children }) => {
 
       {/* Form Section */}
       <div className="flex-1 flex items-center justify-center px-6 z-10 mt-24 md:mt-0">
-        <div className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md">
+        <div className="bg-[#1e1e1e] p-10 rounded-3xl shadow-2xl w-full max-w-md">
           {children}
         </div>
       </div>
@@ -57,8 +57,8 @@ const AuthLayout = ({ children }) => {
         
         {/* Motivational Text */}
         <div className="z-10">
-          <p className="text-blue-900 font-medium text-lg leading-snug italic text-center">
-            â€œSmall savings today lead to big dreams tomorrow.â€
+          <p className="text-blue-300 font-medium text-lg leading-snug italic text-center">
+            “Small savings today lead to big dreams tomorrow.”
           </p>
         </div>
         
@@ -67,7 +67,7 @@ const AuthLayout = ({ children }) => {
           <img
             src={CARD_1}
             alt="Decorative card"
-            className="w-full h-full object-contain object-center rounded-[32px] bg-white"
+            className="w-full h-full object-contain object-center rounded-[32px] bg-[#2a2a2a]"
           />
         </div>
       </div>
@@ -76,4 +76,3 @@ const AuthLayout = ({ children }) => {
 };
 
 export default AuthLayout;
-

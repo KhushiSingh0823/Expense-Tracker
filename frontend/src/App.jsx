@@ -17,7 +17,7 @@ import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <UserProvider>
-      <div>
+      <div className="bg-[#1a1a1a] min-h-screen text-gray-200">
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/login" element={<Login />} />
@@ -27,22 +27,24 @@ const App = () => {
           <Route path="/expense" element={<Expense />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        
+        <Toaster 
+          toastOptions={{
+            className: "",
+            style: {
+              fontSize: '13px',
+              background: '#2a2a2a',
+              color: '#f0f0f0',
+            },
+          }}
+        />
       </div>
-      <Toaster 
-        toastOptions={{
-          className: "",
-          style:{
-            fontSize:'13px'
-          },
-        }}
-      />
     </UserProvider>
   );
 };
 
 export default App;
 
-// ✅ Reliable Root component with programmatic redirect
 const Root = () => {
   const navigate = useNavigate();
 
@@ -55,5 +57,5 @@ const Root = () => {
     }
   }, [navigate]);
 
-  return null; // Don't render anything until redirected
+  return null; 
 };
